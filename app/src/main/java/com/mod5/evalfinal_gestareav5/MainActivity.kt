@@ -67,7 +67,9 @@ class MainActivity : AppCompatActivity() {
         // Observer del ViewModel - gestiona mensajes globales
         taskViewModel.statusMessage.observe(this) { message ->
             if (!message.isNullOrBlank()) {
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    message,
+                    Toast.LENGTH_SHORT).show()
                 taskViewModel.clearStatusMessage()
             }
         }
@@ -76,14 +78,14 @@ class MainActivity : AppCompatActivity() {
     // Método para editar una tarea
     fun startTaskEdit(task: Task) {
         val fragment = CrearTareaFragment.newInstanceForEditing(
-            taskId = task.id,
-            taskName = task.name,
+            taskId          = task.id,
+            taskName        = task.name,
             taskDescription = task.description,
-            taskStatus = task.status,
-            taskDate = task.date,
-            taskTime = task.time,
-            taskCategory = task.category,
-            requiresAlarm = task.requiresAlarm
+            taskStatus      = task.status,
+            taskDate        = task.date,
+            taskTime        = task.time,
+            taskCategory    = task.category,
+            requiresAlarm   = task.requiresAlarm
         )
         loadFragment(fragment)
     }
