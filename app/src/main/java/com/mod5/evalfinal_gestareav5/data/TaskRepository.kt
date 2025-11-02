@@ -1,25 +1,26 @@
 package com.mod5.evalfinal_gestareav5.data
 
+// Librerías
 import android.app.Application
-import com.mod5.evalfinal_gestareav5.data.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.*
 
 class TaskRepository(application: Application) {
 
+    // Vals
     private val context  = application
     private val fileName = "tareas.csv"
     private val file     = File(context.getExternalFilesDir(null), fileName)
 
     init {
-        // Aseguramos que el archivo exista
+        // verifica que el archivo existe y lo crea si no existe
         if (!file.exists()) {
             file.createNewFile()
         }
     }
 
-    // Lector puro: Lee del CSV y devuelve la lista completa, manejando la limpieza de la entrada.
+    // Lee el csv y trae todos los registros, si los hay.
     suspend fun readAllTasks(): List<Task> = withContext(Dispatchers.IO) {
         val tasks = mutableListOf<Task>()
         if (!file.exists()) return@withContext tasks
@@ -30,8 +31,9 @@ class TaskRepository(application: Application) {
                     val trimmedLine = rawLine.trim()
 
                     if (trimmedLine.isNotEmpty()) {
-                        // Limpieza defensiva: elimina espacios alrededor de las comas para un parseo seguro
-                        val cleanLine = trimmedLine.replace(Regex("\\s*,\\s*"), ",")
+                        // como buena práctica, hace una limpieza defensiva
+                        val cleanLine = trimmedLine.replace(Regex("\\s*,\\s*"),
+                            ",")
 
                         Task.fromCsvString(cleanLine)?.let { tasks.add(it) }
                     }
@@ -41,11 +43,11 @@ class TaskRepository(application: Application) {
             println("Error al leer el archivo CSV: ${e.message}")
         }
 
-        // Retorna la lista sin ordenar (Pura).
+        // Retorna la lista en el objeto 'tasks'.
         tasks
     }
 
-    // Guarda la lista completa de tareas en el CSV (Función auxiliar privada).
+    // Guarda la lista de tareas en el csv
     private fun saveAllTasks(tasks: List<Task>): Boolean {
         return try {
             BufferedWriter(FileWriter(file)).use { writer ->
@@ -56,7 +58,7 @@ class TaskRepository(application: Application) {
             }
             true
         } catch (e: Exception) {
-            println("Error al escribir en el archivo CSV: ${e.message}")
+            println("Error al escribir en el archivo 'csv': ${e.message}")
             false
         }
     }
@@ -83,7 +85,7 @@ class TaskRepository(application: Application) {
 
     // Elimina una tarea por ID.
     suspend fun deleteTaskById(id: String): Boolean = withContext(Dispatchers.IO) {
-        val tasks = readAllTasks().toMutableList()
+        val tasks        = readAllTasks().toMutableList()
         val originalSize = tasks.size
         tasks.removeIf { it.id == id }
 

@@ -1,5 +1,6 @@
 package com.mod5.evalfinal_gestareav5
 
+// Librerías
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -16,15 +17,15 @@ import com.mod5.evalfinal_gestareav5.viewmodel.TaskViewModel
 import com.mod5.evalfinal_gestareav5.ui.CrearTareaFragment
 import com.mod5.evalfinal_gestareav5.ui.VerTareasFragment
 
-
 class MainActivity : AppCompatActivity() {
+    // Vars
     private lateinit var mainContentLayout: LinearLayout
-    private lateinit var taskViewModel: TaskViewModel
+    private lateinit var taskViewModel    : TaskViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Inicializa el ViewModel, compartido con los fragments.
+        // Inicia el ViewModel que se comparte con los fragments.
         taskViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
 
         // Carga el layout del splash
@@ -39,16 +40,16 @@ class MainActivity : AppCompatActivity() {
     private fun setupMainLayout() {
         setContentView(R.layout.main)
 
-        mainContentLayout = findViewById(R.id.mainContentLayout)
+        mainContentLayout            = findViewById(R.id.mainContentLayout)
         mainContentLayout.visibility = View.VISIBLE
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
-        // Inicialmente, carga el fragmento de ver tareas
+        // Carga el fragmento para ver la lista de tareas (inicio)
         loadFragment(VerTareasFragment.newInstance())
         bottomNavigationView.selectedItemId = R.id.nav_view_tasks
 
-        // Listener para la barra de navegación inferior
+        // Listener para la barra de navegación inferior (ver agenda y agregar tarea)
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_view_tasks -> {
@@ -63,11 +64,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Observador del ViewModel - Correcto para mensajes globales (uso de clearStatusMessage)
+        // Observer del ViewModel - gestiona mensajes globales
         taskViewModel.statusMessage.observe(this) { message ->
             if (!message.isNullOrBlank()) {
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-                // Notifica al ViewModel que ya consumió el mensaje.
                 taskViewModel.clearStatusMessage()
             }
         }
@@ -88,15 +88,16 @@ class MainActivity : AppCompatActivity() {
         loadFragment(fragment)
     }
 
-    // Método para navegar a la lista de tareas (usado por CrearTareaFragment después de guardar)
+    // Método ir a la lista de tareas después de guardar
     fun navigateToTaskList() {
-        // Carga una nueva instancia de VerTareasFragment (esto activa onStart() en el fragment)
+        // Carga una nueva instancia de VerTareasFragment
         loadFragment(VerTareasFragment.newInstance())
         // Actualiza la selección visual en la barra de navegación inferior.
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigationView.selectedItemId = R.id.nav_view_tasks
     }
 
+    // Método que carga fragmento
     fun loadFragment(fragment: Fragment) {
         val fragmentManager: FragmentManager = supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()

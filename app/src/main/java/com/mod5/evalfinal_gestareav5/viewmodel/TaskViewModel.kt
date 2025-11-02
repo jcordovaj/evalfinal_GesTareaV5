@@ -1,5 +1,6 @@
 package com.mod5.evalfinal_gestareav5.viewmodel
 
+// Librerías
 import android.app.Application
 import androidx.lifecycle.*
 import com.mod5.evalfinal_gestareav5.data.Task
@@ -9,12 +10,13 @@ import java.util.*
 
 class TaskViewModel(application: Application) : AndroidViewModel(application) {
 
+    // Vals
     private val repository = TaskRepository(application)
-
     private val _isLoading = MutableLiveData(false)
-    val isLoading: LiveData<Boolean> get() = _isLoading
 
-    private val _allTasks = MutableLiveData<List<Task>>(emptyList())
+    val isLoading: LiveData<Boolean>   get() = _isLoading
+
+    private val _allTasks  = MutableLiveData<List<Task>>(emptyList())
     val allTasks: LiveData<List<Task>> get() = _allTasks
 
     private val _statusMessage = MutableLiveData<String?>()
@@ -34,20 +36,22 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
 
             val tasks = withContext(Dispatchers.IO) {
                 try {
-                    delay(300L) // Simulación de retraso
+                    delay(300L) // Simulación de retraso, si disminuyó porque daba problemas de latencia
                 } catch (t: Throwable) { /* ignore */ }
 
-                // ⭐ Lógica de Negocio: Leer, ordenar y filtrar (Pendientes)
+                // trae todas las tareas, las ordena y filtra por estado = "Pendiente"
                 repository.readAllTasks()
-                    .sortedWith(compareByDescending<Task> { it.date }.thenByDescending { it.time })
+                    .sortedWith(compareByDescending<Task> { it.date }
+                        .thenByDescending { it.time })
                     .filter { it.status == "Pendiente" }
             }
 
-            _allTasks.value = tasks
+            _allTasks.value  = tasks
             _isLoading.value = false
         }
     }
 
+    // Método para guardar o actualizar una tarea
     fun saveOrUpdateTask(
         id: String?,
         name: String,
@@ -68,23 +72,23 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
             val taskId = id ?: UUID.randomUUID().toString()
             val task = Task(taskId, name, description, status, date, time, category, requiresAlarm)
 
-            // 1. Ejecutar Persistencia en IO (simple, solo guarda/actualiza)
+            // Guarda/actualiza
             val persistenceSuccess = withContext(Dispatchers.IO) {
                 try {
-                    delay(300L)
+                    delay(300L) // Delay para simular
                 } catch (t: Throwable) { /* ignore */ }
 
                 if (isEditing) repository.updateTaskInCSV(task)
-                else repository.saveTaskToCSV(task)
+                else repository.saveTaskToCSV(task) //guarda en tarea.csv
             }
 
-            // El código regresa al hilo principal (Main)
+            // Si tiene éxito, vuelve al hilo principal (Main)
             if (persistenceSuccess) {
-                // 2. Activar Evento Único (para CrearTareaFragment)
+                // Activa evento único para instanciar CrearTareaFragment
                 _taskSavedEvent.value = taskId
-                _taskSavedEvent.value = null // Reset inmediato
+                _taskSavedEvent.value = null // Lo resetea
 
-                // 3. Forzar Recarga (actualiza VerTareasFragment con datos frescos)
+                // Fuerza la recarga de las tareas actualizadas en VerTareasFragment
                 loadTasks()
             } else {
                 _statusMessage.value = "ERROR al guardar la tarea"
@@ -95,7 +99,7 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
     fun clearStatusMessage() {
         _statusMessage.value = null
     }
-
+    // Método para marcar tarea como completada
     fun markTaskAsCompleted(task: Task) {
         val completedTask = task.copy(status = "Completada")
         viewModelScope.launch {
@@ -111,6 +115,7 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    // Método borrar tarea
     fun deleteTask(task: Task) {
         viewModelScope.launch {
             val success = withContext(Dispatchers.IO) {

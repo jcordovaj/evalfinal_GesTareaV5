@@ -10,7 +10,7 @@ data class Task(
     val category     : String,
     val requiresAlarm: Boolean
 ) {
-    // Convierte cada objeto Task en una línea del CSV sin espacios después de las comas.
+    // Convierte cada objeto Task en una línea del CSV.
     fun toCsvString(): String {
         return "$id,$name,$description,$status,$date,$time,$category,$requiresAlarm"
     }
@@ -19,14 +19,9 @@ data class Task(
         // Crea un objeto Task a partir de una línea de CSV.
         fun fromCsvString(csvString: String): Task? {
             return try {
-                // Confiamos en que la limpieza se hizo en el Repository antes de split
                 val parts = csvString.split(',')
-                if (parts.size != 8) return null
-
+                if (parts.size != 8) return null // El registro dividido en 8 partes
                 val requiresAlarm = parts[7].toBoolean()
-
-                // Nota: Los campos no necesitan trim() si la limpieza se hizo en el Repository,
-                // pero si el campo en sí contenía espacios, deben manejarse por separado (ej. parts[1].trim())
                 Task(
                     id            = parts[0],
                     name          = parts[1],

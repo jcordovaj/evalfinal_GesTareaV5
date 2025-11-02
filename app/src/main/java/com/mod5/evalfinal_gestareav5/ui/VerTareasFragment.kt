@@ -1,5 +1,6 @@
 package com.mod5.evalfinal_gestareav5.ui
 
+// Librerías
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,6 +20,7 @@ import com.mod5.evalfinal_gestareav5.viewmodel.TaskViewModel
 
 class VerTareasFragment : Fragment() {
 
+    // Vars
     private lateinit var recyclerView: RecyclerView
     private lateinit var textViewEmptyMessage: TextView
     private lateinit var progressBarLoading: ProgressBar
@@ -49,25 +51,20 @@ class VerTareasFragment : Fragment() {
         recyclerView.adapter       = taskAdapter
 
         setupObservers()
-        // Eliminamos la llamada a loadTasks() de aquí, ya que el init{} del ViewModel
-        // y onStart() se encargarán de la carga.
-
         return view
     }
 
-    /**
-     * **CORRECCIÓN CLAVE:** Forzar la recarga de datos al volverse visible.
-     */
+    // Método que se ejecuta cuando el fragmento se hace visible y fuerza la recarga
     override fun onStart() {
         super.onStart()
         taskViewModel.loadTasks()
     }
 
+    // Método que setea los observadores
     private fun setupObservers() {
         taskViewModel.allTasks.observe(viewLifecycleOwner) { tasks ->
             taskAdapter.updateTasks(tasks)
 
-            // La visibilidad debe depender de tasks.isNullOrEmpty() Y no estar cargando
             val isLoadingNow = taskViewModel.isLoading.value ?: false
             if (tasks.isNullOrEmpty() && !isLoadingNow) {
                 recyclerView.visibility = View.GONE
@@ -101,7 +98,7 @@ class VerTareasFragment : Fragment() {
     private fun confirmAndDeleteTask(task: Task) {
         AlertDialog.Builder(requireContext())
             .setTitle("Eliminar tarea")
-            .setMessage("¿Deseas eliminar la tarea \"${task.name}\"?")
+            .setMessage("Confirme que desea eliminar la tarea \"${task.name}\"")
             .setPositiveButton("Eliminar") { _, _ ->
                 taskViewModel.deleteTask(task)
             }

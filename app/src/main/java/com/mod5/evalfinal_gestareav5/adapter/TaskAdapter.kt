@@ -1,5 +1,6 @@
 package com.mod5.evalfinal_gestareav5.adapter
 
+// Librerías
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,7 @@ class TaskAdapter(
     private var tasks        : List<Task>,
     private val onItemClick  : (Task) -> Unit,
     private val onDeleteClick: (Task) -> Unit
-) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+    ) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -29,10 +30,10 @@ class TaskAdapter(
 
     override fun getItemCount(): Int = tasks.size
 
-    // Función clave para MVVM: Actualiza la lista desde el LiveData del ViewModel
+    // Función que actualiza la lista desde el LiveData del ViewModel
     fun updateTasks(newTasks: List<Task>) {
         this.tasks = newTasks
-        notifyDataSetChanged() // realza la notificación del cambio
+        notifyDataSetChanged() // realiza la notificación del cambio
     }
 
     class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -57,14 +58,13 @@ class TaskAdapter(
             taskCategory.text    = "Tipo: ${task.category}"
             taskAlarm.text       = if (task.requiresAlarm) "Alarma: ✅ ON" else "Alarma: ❌ OFF"
 
-            // Listener para Edición (toda la fila)
+            // Listener para Edición de un registro
             itemView.setOnClickListener { onItemClick(task) }
 
-            // Listener para Eliminación (solo el botón)
+            // Listener para Eliminación
             buttonDelete.setOnClickListener { onDeleteClick(task) }
 
-            // Lógica visual adicional para el estado
-            val context = itemView.context
+            val context     = itemView.context
             val statusColor = when (task.status) {
                 "Completada" -> context.getColor(R.color.green_completed)
                 "Cancelada"  -> context.getColor(R.color.red_cancelled)

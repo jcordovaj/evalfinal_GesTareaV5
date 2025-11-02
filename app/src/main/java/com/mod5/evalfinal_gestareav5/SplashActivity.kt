@@ -1,5 +1,6 @@
 package com.mod5.evalfinal_gestareav5
 
+// Librerías
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -19,20 +20,19 @@ class SplashActivity : AppCompatActivity() {
         val buttonStartApp: Button = findViewById(R.id.buttonStartApp)
         // Listener del botón
         buttonStartApp.setOnClickListener {
-            // Aquí el Intent explícito lanza la MainActivity
+            // El 'Intent' lanza la MainActivity
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
 
-            // Se finaliza la SplashActivity para que el usuario no pueda volver con el botón 'back'
+            // Finalizamos la SplashActivity para sacarla del backstack
             finish()
         }
 
-        //  Si el usuario no presiona el botón, el splash desaparecerá igual después de 3 segundos
+        //  Creamos un delay de 3 segs para el botón "Continuar, así pasa igual a la vista de lista
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }, 3000)
-
     }
 }
