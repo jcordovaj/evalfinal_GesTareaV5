@@ -164,7 +164,6 @@ El flujo base es el siguiente:
         <td align="center">Al lanzar la App</td>
         <td align="center">Splash bienvenida</td>
     </tr>
-
     <tr>
         <td align="center">
             <img src="scrapbook/PantallaInicial.png" alt="Formulario crear/ editar tarea" width="200"/>
@@ -181,7 +180,6 @@ El flujo base es el siguiente:
         <td align="center">Fragmento Crear/Editar Tarea</td>
         <td align="center">Autorización para Notificaciones</td>
     </tr>
-
     <tr>
         <td align="center">
             <img src="scrapbook/picker_fecha.png" alt="Selector de estados" width="200"/>
@@ -214,10 +212,10 @@ El flujo base es el siguiente:
         <td align="center">Tarea creada</td>
         <td align="center">Eliminar Tarea</td>
     </tr>
-
 </table>
 
 Diagrama
+
 graph LR
 subgraph Vista (UI - Main Thread)
 V[Fragments: VerTareas / CrearTarea]
