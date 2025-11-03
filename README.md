@@ -214,36 +214,6 @@ El flujo base es el siguiente:
     </tr>
 </table>
 
-Diagrama
-
-graph LR
-subgraph Vista (UI - Main Thread)
-V[Fragments: VerTareas / CrearTarea]
-end
-
-    subgraph ViewModel (Logic - Main Thread)
-        VM[TaskViewModel]
-    end
-
-    subgraph Modelo (Data - I/O Thread)
-        R[TaskRepository]
-        D[(Archivo CSV)]
-    end
-
-    V -- 1. Inicia Acción (loadTasks / save) --> VM
-
-    VM -- 2. Lanza Coroutine (viewModelScope) --> VM
-    VM -- 3. Pide Datos/Persistencia --> R
-
-    R -- 4. Ejecuta I/O (Dispatchers.IO) --> D
-    D -- 5. Retorna Datos Limpios --> R
-
-    R -- 6. Retorno de Coroutine --> VM
-
-    VM -- 7. Publica el Resultado (allTasks / taskSavedEvent) --> L(LiveData<T>)
-
-    L -- 8. Observa Cambio (Reactividad) --> V
-
 ## Guía de Ejecución del Proyecto
 
 **Para ejecutar este proyecto en tu entorno de desarrollo, siga estos 'quick steps':**
@@ -262,7 +232,7 @@ end
 
 2.**Instalar:** Instala la aplicación, salta los avisos de advertencia, es normal si la aplicación no ha sido productivizada la plataforma de Android.
 
-3.**Abrir la App:** Haz doble clic en el ícono "Agenda".
+3.**Abrir la App:** Haz doble clic en el ícono de _**Peras con Manzanas para abrir**_ "GesTarea V5".
 
 4.**Recorrer las opciones:** Cliquea en las opciones y podrás acceder al listado de eventos, editar cada evento, crear nuevos eventos, regresando a cualquier punto de la app.
 
@@ -270,11 +240,12 @@ end
 
 a. **Clonar el repositorio:**
 
-    ```bash
+```bash
 
 https://github.com/jcordovaj/evalfinal_GesTareaV5.git
 
-    ```
+
+```
 
 b. **Abrir el Proyecto en Android Studio:**
 
@@ -314,4 +285,8 @@ Se puede contribuir reportando problemas o con nuevas ideas, por favor respetar 
 
 ## Licencia
 
-Proyecto con fines educativos, Licencia MIT
+Proyecto con fines educativos.
+
+```
+
+```
