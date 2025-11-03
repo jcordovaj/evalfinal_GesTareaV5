@@ -160,114 +160,91 @@ El flujo base es el siguiente:
         </td>
     </tr>
     <tr>
-        <td align="center">Pantalla Inicial</td>
-        <td align="center">Solicitud de Permiso (Tiramisu+)</td>
-        <td align="center">Vista Agenda sin tareas</td>
+        <td align="center">App instalada</td>
+        <td align="center">Al lanzar la App</td>
+        <td align="center">Splash bienvenida</td>
     </tr>
 
     <tr>
         <td align="center">
-            <img src="scrapbook/crear_editar_tarea.png" alt="Formulario crear/ editar tarea" width="200"/>
+            <img src="scrapbook/PantallaInicial.png" alt="Formulario crear/ editar tarea" width="200"/>
         </td>
         <td align="center">
-            <img src="scrapbook/fecha.png" alt="Selector de fecha" width="200"/>
+            <img src="scrapbook/CrearEditar.png" alt="Selector de fecha" width="200"/>
         </td>
         <td align="center">
-            <img src="scrapbook/hora.png" alt="Selector de hora" width="200"/>
+            <img src="scrapbook/Autorizar.png" alt="Selector de hora" width="200"/>
         </td>
     </tr>
     <tr>
-        <td align="center">Formulario Crear/Editar Tarea</td>
-        <td align="center">Selector de Fecha</td>
-        <td align="center">Selector de Hora</td>
+        <td align="center">Pantalla Inicial Sin Datos</td>
+        <td align="center">Fragmento Crear/Editar Tarea</td>
+        <td align="center">Autorización para Notificaciones</td>
     </tr>
 
     <tr>
         <td align="center">
-            <img src="scrapbook/selector_estados.png" alt="Selector de estados" width="200"/>
+            <img src="scrapbook/picker_fecha.png" alt="Selector de estados" width="200"/>
         </td>
         <td align="center">
-            <img src="scrapbook/selector_categorias.png" alt="Selector categorías" width="200"/>
+            <img src="scrapbook/picker_hora.png" alt="Selector categorías" width="200"/>
         </td>
         <td align="center">
-            <img src="scrapbook/manejo_toast_guardar.png" alt="Toast guardar" width="200"/>
+            <img src="scrapbook/selector_estado.png" alt="Toast guardar" width="200"/>
         </td>
     </tr>
     <tr>
-        <td align="center">Spinner de Estado</td>
-        <td align="center">Spinner de Categoría</td>
-        <td align="center">Feedback de Guardado (Toast)</td>
+        <td align="center">Picker de Fecha</td>
+        <td align="center">Picker de Hora</td>
+        <td align="center">Selector de Estado</td>
     </tr>
-
-</table><table width="100%">
     <tr>
         <td align="center" width="33%">
-            <img src="scrapbook/pantalla_inicial.png" alt="Pantalla inicial" width="200"/>
+            <img src="scrapbook/selector_categoria.png" alt="Pantalla inicial" width="200"/>
         </td>
         <td align="center" width="33%">
-            <img src="scrapbook/permisos.png" alt="Autorizar permiso NOTIFICACIÓN" width="200"/>
+            <img src="scrapbook/tarea_creada.png" alt="Autorizar permiso NOTIFICACIÓN" width="200"/>
         </td>
         <td align="center" width="33%">
-            <img src="scrapbook/vista_sin_tareas.png" alt="Agenda sin tareas" width="200"/>
+            <img src="scrapbook/eliminar_tarea.png" alt="Agenda sin tareas" width="200"/>
         </td>
     </tr>
     <tr>
-        <td align="center">Pantalla Inicial</td>
-        <td align="center">Solicitud de Permiso (Tiramisu+)</td>
-        <td align="center">Vista Agenda sin tareas</td>
-    </tr>
-
-    <tr>
-        <td align="center">
-            <img src="scrapbook/crear_editar_tarea.png" alt="Formulario crear/ editar tarea" width="200"/>
-        </td>
-        <td align="center">
-            <img src="scrapbook/fecha.png" alt="Selector de fecha" width="200"/>
-        </td>
-        <td align="center">
-            <img src="scrapbook/hora.png" alt="Selector de hora" width="200"/>
-        </td>
-    </tr>
-    <tr>
-        <td align="center">Formulario Crear/Editar Tarea</td>
-        <td align="center">Selector de Fecha</td>
-        <td align="center">Selector de Hora</td>
-    </tr>
-
-    <tr>
-        <td align="center">
-            <img src="scrapbook/selector_estados.png" alt="Selector de estados" width="200"/>
-        </td>
-        <td align="center">
-            <img src="scrapbook/selector_categorias.png" alt="Selector categorías" width="200"/>
-        </td>
-        <td align="center">
-            <img src="scrapbook/manejo_toast_guardar.png" alt="Toast guardar" width="200"/>
-        </td>
-    </tr>
-    <tr>
-        <td align="center">Spinner de Estado</td>
-        <td align="center">Spinner de Categoría</td>
-        <td align="center">Feedback de Guardado (Toast)</td>
+        <td align="center">Selector de categoría</td>
+        <td align="center">Tarea creada</td>
+        <td align="center">Eliminar Tarea</td>
     </tr>
 
 </table>
 
-<p float="left">
-  <img src="scrapbook/pantalla_inicial.png" alt="Pantalla inicial" width="150"/>  
-  <img src="scrapbook/permisos.png" alt="Autorizar permiso NOTIFICACIÓN" width="150"/>
-  <img src="scrapbook/vista_sin_tareas.png" alt="Agenda sin tareas" width="150"/>
-  <img src="scrapbook/crear_editar_tarea.png" alt="Formulario crear/ editar tarea" width="150"/>
-  <img src="scrapbook/fecha.png" alt="Selector de fecha" width="150"/>
-  <img src="scrapbook/hora.png" alt="Selector de hora" width="150"/>  
-  <img src="scrapbook/selector_estados.png" alt="Selector de estados" width="150"/>
-  <img src="scrapbook/selector_categorias.png" alt="Selector categorías" width="150"/>
-  <img src="scrapbook/manejo_toast_guardar.png" alt="Toast guardar" width="150"/>
-  <img src="scrapbook/tarea_creada1.png" alt="Crea Tarea 1" width="150"/>
-  <img src="scrapbook/confirmar_eliminacion.png" alt="Confirmar elimina Tarea 1" width="150"/>
-  <img src="scrapbook/toast_eliminacion.png" alt="Toast confirmación elimnación" width="150"/>  
-  
-</p>
+Diagrama
+graph LR
+subgraph Vista (UI - Main Thread)
+V[Fragments: VerTareas / CrearTarea]
+end
+
+    subgraph ViewModel (Logic - Main Thread)
+        VM[TaskViewModel]
+    end
+
+    subgraph Modelo (Data - I/O Thread)
+        R[TaskRepository]
+        D[(Archivo CSV)]
+    end
+
+    V -- 1. Inicia Acción (loadTasks / save) --> VM
+
+    VM -- 2. Lanza Coroutine (viewModelScope) --> VM
+    VM -- 3. Pide Datos/Persistencia --> R
+
+    R -- 4. Ejecuta I/O (Dispatchers.IO) --> D
+    D -- 5. Retorna Datos Limpios --> R
+
+    R -- 6. Retorno de Coroutine --> VM
+
+    VM -- 7. Publica el Resultado (allTasks / taskSavedEvent) --> L(LiveData<T>)
+
+    L -- 8. Observa Cambio (Reactividad) --> V
 
 ## Guía de Ejecución del Proyecto
 
@@ -295,13 +272,11 @@ El flujo base es el siguiente:
 
 a. **Clonar el repositorio:**
 
-```bash
+    ```bash
 
+https://github.com/jcordovaj/evalfinal_GesTareaV5.git
 
-https://github.com/jcordovaj/ae3_abp1_GesTareaV3.git
-
-
-```
+    ```
 
 b. **Abrir el Proyecto en Android Studio:**
 
